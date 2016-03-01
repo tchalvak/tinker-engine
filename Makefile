@@ -24,13 +24,16 @@ serve:
 	rm -f /tmp/www
 	ln -s `pwd`/www /tmp/www
 	nginx -c `pwd`/conf/nginx.conf
+	ps waux | grep nginx
 	# server may be up and running now
 
 stop:
 	nginx -c `pwd`/conf/nginx.conf -s stop
+	ps waux | grep nginx
 
 reload:
 	nginx -c `pwd`/conf/nginx.conf -s reload
+	ps waux | grep nginx
 
 phantomjs: tests/bin/phantomjs
 
