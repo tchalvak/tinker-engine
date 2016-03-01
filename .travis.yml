@@ -3,9 +3,8 @@ python:
   - "2.7"
   - "3.5"
 # command to install dependencies
-install: 
-  ./configure
-  make
+before_install: ./configure
+install: make
 # command to run tests
 script: 
   make test
