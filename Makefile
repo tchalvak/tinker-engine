@@ -6,6 +6,9 @@ clean:
 	#noop
 
 deps:
+	rm -rf ${HOME}/.virtualenv
+	which python3
+	virtualenv -p `which python3` "${HOME}/.virtualenv"
 	pip3 install -U -r `pwd`/requirements.txt
 
 test:
