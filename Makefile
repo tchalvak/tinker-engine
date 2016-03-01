@@ -2,7 +2,7 @@
 
 DOMAIN=http://localhost:8775/
 PHANTOMPATH=`pwd`/tests/bin/phantomjs
-NGINX_PATH=`readlink nginx-1*/objs/nginx`
+NGINX_PATH=`readlink -f nginx-1*/objs/nginx`
 
 -include CONFIG
 
