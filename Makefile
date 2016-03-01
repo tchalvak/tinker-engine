@@ -15,10 +15,11 @@ test:
 	py.test tests/
 	nginx -t -c `pwd`/conf/nginx.conf
 
-serve: stop
+serve:
 	rm -f /tmp/www
 	ln -s `pwd`/www /tmp/www
 	nginx -c `pwd`/conf/nginx.conf
+	# server may be up and running now
 
 stop:
 	nginx -c `pwd`/conf/nginx.conf -s stop
