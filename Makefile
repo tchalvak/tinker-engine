@@ -1,15 +1,20 @@
 .PHONY: build test serve
 
-build: serve
-	pip3 install pytest -U
+build: deps serve
+
+clean:
+	#noop
+
+deps:
+	pip3 install -U -r `pwd`/requirements.txt
 
 test:
 	py.test tests/
 	nginx -t -c `pwd`/conf/nginx.conf
 
-serve:
+serve: stop
 	rm -f /tmp/www
-	ln -s ./www /tmp/www
+	ln -s `pwd`/www /tmp/www
 	nginx -c `pwd`/conf/nginx.conf
 
 stop:
