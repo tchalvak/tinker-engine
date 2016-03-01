@@ -9,3 +9,5 @@ fi
 cd nginx-1*
 ./configure
 make
+
+echo "NGINX_PATH=`readlink nginx-1*/objs/nginx`" >> CONFIG

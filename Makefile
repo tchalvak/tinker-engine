@@ -1,7 +1,8 @@
-.PHONY: build test serve
+.PHONY: build test serve stop deps
 
 DOMAIN=http://localhost:8775/
-PHANTOMPATH=tests/bin/phantomjs
+PHANTOMPATH=`pwd`/tests/bin/phantomjs
+NGINX_PATH=`readlink nginx-1*/objs/nginx`
 
 -include CONFIG
 
@@ -18,21 +19,21 @@ deps:
 
 test:
 	py.test tests/
-	`pwd`/nginx-1*/objs/nginx -t -c `pwd`/conf/nginx.conf
+	${NGINX_PATH} -t -c `pwd`/conf/nginx.conf
 
 serve:
 	rm -f /tmp/www
 	ln -s `pwd`/www /tmp/www
-	`pwd`/nginx-1*/objs/nginx -c `pwd`/conf/nginx.conf
+	${NGINX_PATH} -c `pwd`/conf/nginx.conf
 	ps waux | grep nginx
 	# server may be up and running now
 
 stop:
-	`pwd`/nginx-1*/objs/nginx -c `pwd`/conf/nginx.conf -s stop
+	${NGINX_PATH} -c `pwd`/conf/nginx.conf -s stop
 	ps waux | grep nginx
 
 reload:
-	`pwd`/nginx-1*/objs/nginx -c `pwd`/conf/nginx.conf -s reload
+	${NGINX_PATH} -c `pwd`/conf/nginx.conf -s reload
 	ps waux | grep nginx
 
 phantomjs: tests/bin/phantomjs
