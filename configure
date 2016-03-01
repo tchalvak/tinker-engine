@@ -1,0 +1,11 @@
+echo "DOMAIN=http://localhost:8775/" > CONFIG
+echo "PHANTOMPATH=tests/bin/phantomjs" >> CONFIG
+
+
+if [ ! -d "./nginx-1.9.12/" ]; then
+    wget -N http://nginx.org/download/nginx-1.9.12.tar.gz
+    tar -xvf nginx-1.9.12.tar.gz
+fi
+cd nginx-1*
+./configure
+make

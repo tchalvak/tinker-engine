@@ -1,9 +1,14 @@
 .PHONY: build test serve
 
+DOMAIN=http://localhost:8775/
+PHANTOMPATH=tests/bin/phantomjs
+
+-include CONFIG
+
 build: deps serve
 
 clean:
-	#noop
+	rm -rf nginx-1* phantomjs-2* tests/bin/phantomjs tests/output/* vendor/*
 
 deps:
 	rm -rf ${HOME}/.virtualenv
@@ -26,3 +31,13 @@ stop:
 
 reload:
 	nginx -c `pwd`/conf/nginx.conf -s reload
+
+phantomjs: tests/bin/phantomjs
+
+tests/bin/phantomjs:
+	mkdir -p vendor
+	wget https://bitbucket.org/ariya/phantomjs/downloads/phantomjs-2.1.1-linux-x86_64.tar.bz2 -P ./vendor
+	tar -xvf ./vendor/phantomjs-2.1.1-linux-x86_64.tar.bz2 -C ./vendor/
+	mkdir -p tests/bin/
+	mkdir -p tests/output/
+	ln -s `pwd`/vendor/phantomjs-2.1.1-linux-x86_64/bin/phantomjs ${PHANTOMPATH}
