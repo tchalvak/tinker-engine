@@ -1,0 +1,15 @@
+server {
+    listen 80;
+    server_name tinker.local;
+
+    root /srv/tinker/www;
+
+    autoindex on;
+
+    index index.html index.htm;
+
+    location / {
+        try_files $uri $uri/ =404;
+    }
+
+}
