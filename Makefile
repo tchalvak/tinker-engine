@@ -18,21 +18,21 @@ deps:
 
 test:
 	py.test tests/
-	nginx -t -c `pwd`/conf/nginx.conf
+	`pwd`/nginx-1*/objs/nginx -t -c `pwd`/conf/nginx.conf
 
 serve:
 	rm -f /tmp/www
 	ln -s `pwd`/www /tmp/www
-	nginx -c `pwd`/conf/nginx.conf
+	`pwd`/nginx-1*/objs/nginx -c `pwd`/conf/nginx.conf
 	ps waux | grep nginx
 	# server may be up and running now
 
 stop:
-	nginx -c `pwd`/conf/nginx.conf -s stop
+	`pwd`/nginx-1*/objs/nginx -c `pwd`/conf/nginx.conf -s stop
 	ps waux | grep nginx
 
 reload:
-	nginx -c `pwd`/conf/nginx.conf -s reload
+	`pwd`/nginx-1*/objs/nginx -c `pwd`/conf/nginx.conf -s reload
 	ps waux | grep nginx
 
 phantomjs: tests/bin/phantomjs
