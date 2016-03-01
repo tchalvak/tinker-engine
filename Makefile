@@ -8,8 +8,12 @@ test:
 	nginx -t -c `pwd`/conf/nginx.conf
 
 serve:
-	ln -s www/ /tmp/www
+	rm -f /tmp/www
+	ln -s ./www /tmp/www
 	nginx -c `pwd`/conf/nginx.conf
 
 stop:
 	nginx -c `pwd`/conf/nginx.conf -s stop
+
+reload:
+	nginx -c `pwd`/conf/nginx.conf -s reload
